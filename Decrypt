@@ -1,0 +1,22 @@
+def decrypt(ciphered_text, shift):
+    decrypted_text = ''
+    for char in ciphered_text:
+        if char.isalpha():
+            ascii_offset = ord('A') if char.isupper() else ord('a')
+            decrypted_char = chr((ord(char) - ascii_offset - shift) % 26 + ascii_offset)
+            decrypted_text += decrypted_char
+        else:
+            decrypted_text += char
+    return decrypted_text
+
+ciphered_text = "VZ FRYSVFU VZCNGVRAG NAQ N YVGGYR VAFRPHER V ZNXR ZVFGNXRF V NZ BHG BS PBAGEBY NAQNG GVZRF UNEQ GB UNAQYR OHG VS LBH PNAG UNAQYR ZR NG ZL JBEFG GURA LBH FHER NF URYYQBAG QRFREIR ZR NG ZL ORFG ZNEVYLA ZBAEBR"
+possible_shifts = []
+
+for shift in range(1, 26):
+    decrypted_text = decrypt(ciphered_text, shift)
+    if 'THE' in decrypted_text:
+        possible_shifts.append(shift)
+        print("Shift:", shift)
+        print("Decrypted Text:", decrypted_text)
+
+print("Possible shift(s):", possible_shifts)
